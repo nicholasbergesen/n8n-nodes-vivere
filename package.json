@@ -1,0 +1,61 @@
+{
+	"name": "n8n-nodes-vivere",
+	"version": "0.1.0",
+	"description": "n8n node for Vivere: report when a workflow runs, finishes or fails, with item counts and AI cost, and create heartbeat monitors",
+	"license": "MIT",
+	"homepage": "https://vivere.dev/docs/n8n",
+	"keywords": [
+		"n8n-community-node-package",
+		"n8n",
+		"vivere",
+		"heartbeat",
+		"cron monitoring",
+		"dead mans switch",
+		"monitoring"
+	],
+	"author": {
+		"name": "Nicholas Bergesen",
+		"email": "hello@vivere.dev",
+		"url": "https://vivere.dev"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nicholasbergesen/n8n-nodes-vivere.git"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist",
+		"!dist/tsconfig.tsbuildinfo"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/VivereApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/Vivere/Vivere.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "^0.52.5",
+		"eslint": "9.32.0",
+		"prettier": "3.6.2",
+		"release-it": "^21.1.0",
+		"typescript": "5.9.2"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	},
+	"bugs": {
+		"url": "https://github.com/nicholasbergesen/n8n-nodes-vivere/issues"
+	}
+}

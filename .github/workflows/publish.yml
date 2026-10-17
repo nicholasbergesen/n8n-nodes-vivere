@@ -1,0 +1,70 @@
+# Publishes the package to npm with a provenance statement when a version tag
+# such as 0.1.0 is pushed, or when the workflow is run by hand from the Actions
+# tab. n8n requires community nodes to be published from GitHub Actions with
+# provenance since 1 May 2026.
+#
+# This job runs on a GitHub-hosted runner on purpose. The npm registry only
+# accepts provenance built on GitHub-hosted runners, and npm trusted publishing
+# does not support self-hosted runners either.
+#
+# Authentication, either of:
+#   - NPM_TOKEN repository secret: an npm granular access token with read and
+#     write access to n8n-nodes-vivere. Needed for the first publish.
+#   - npm trusted publishing (no secret): on npmjs.com, package settings,
+#     Trusted Publisher, GitHub Actions, repository
+#     nicholasbergesen/n8n-nodes-vivere, workflow publish.yml. Then delete the
+#     NPM_TOKEN secret and the token.
+#
+# To release: bump "version" in package.json and CHANGELOG.md, merge to main,
+# then push a tag with that version (git tag 0.1.1 && git push origin 0.1.1).
+
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+  workflow_dispatch:
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Mints the OIDC token that signs the provenance statement.
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Check the tag matches package.json
+        if: github.ref_type == 'tag'
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [ "$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Lint, build and publish with provenance
+        # n8n-node release sees GITHUB_ACTIONS, runs lint and build, then
+        # npm publish with NPM_CONFIG_PROVENANCE=true.
+        run: npm run release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
