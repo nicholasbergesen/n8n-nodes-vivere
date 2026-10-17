@@ -33,7 +33,8 @@
 	},
 	"files": [
 		"dist",
-		"!dist/tsconfig.tsbuildinfo"
+		"!dist/tsconfig.tsbuildinfo",
+		"!dist/docs"
 	],
 	"n8n": {
 		"n8nNodesApiVersion": 1,
@@ -57,5 +58,8 @@
 	},
 	"bugs": {
 		"url": "https://github.com/nicholasbergesen/n8n-nodes-vivere/issues"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }
