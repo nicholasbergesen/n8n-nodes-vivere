@@ -8,7 +8,7 @@ n8n's Error Workflow only fires when an execution fails. A Schedule Trigger that
 
 **Watch the demo** (5:43): installing the node, creating a monitor, reporting runs from a workflow and from an AI Agent, and how Vivere alerts you.
 
-[![Watch the Vivere node for n8n demo on YouTube](docs/demo-video.jpg)](https://www.youtube.com/watch?v=sDGFDhe-Wns)
+[![Watch the Vivere node for n8n demo on YouTube](docs/demo-video.jpg)](https://www.youtube.com/watch?v=OXvKbyKxVNM)
 
 ## Setup
 
