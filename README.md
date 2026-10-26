@@ -61,7 +61,7 @@ Keep the Success ping in each workflow as well. The Error Trigger covers runs th
 
 ## Credentials
 
-The **Vivere API** credential takes an API key from [vivere.dev/app/keys](https://vivere.dev/app/keys) (keys start with `vv_`). n8n checks it by listing your pages. The node uses the key to list monitors and pages and to create monitors. The pings themselves go to the monitor's ping URL and do not carry the key.
+The **Vivere API** credential takes an API key from [vivere.dev/app/keys](https://vivere.dev/app/keys) (keys start with `vv_`). n8n checks it by reading your account, which any key may do. The node uses the key to list monitors and pages and to create monitors, so a key with custom permissions needs monitors read (and write, to create monitors) and pages read for those lists. The pings themselves go to the monitor's ping URL and do not carry the key.
 
 ## Compatibility
 

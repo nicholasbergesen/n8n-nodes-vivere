@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- The credential test reads the account (`GET /api/v1/account`) instead of listing pages, so a key with custom permissions and no pages access passes it.
+
 ## 0.1.0
 
 First release.
