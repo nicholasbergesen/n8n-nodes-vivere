@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-vivere",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "n8n node for Vivere: report when a workflow runs, finishes or fails, with item counts and AI cost, and create heartbeat monitors",
 	"license": "MIT",
 	"homepage": "https://vivere.dev/docs/n8n",

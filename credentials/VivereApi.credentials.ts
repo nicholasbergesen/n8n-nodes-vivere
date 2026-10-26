@@ -43,7 +43,8 @@ export class VivereApi implements ICredentialType {
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: 'https://vivere.dev/api/v1',
-			url: '/pages',
+			// Any key may read its account, whatever permissions it was given.
+			url: '/account',
 		},
 	};
 }
